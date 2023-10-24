@@ -1,9 +1,9 @@
 from gui import Top_win
-from api import get_time, suit_img
-import customtkinter as ctk, os, time
+from api import get_time
+import customtkinter as ctk, os
 from customtkinter import filedialog
 import tkinter.messagebox as ctkmb
-from PIL import Image, ImageFilter, ImageTk
+from PIL import Image, ImageFilter
 
 class output_multiple_win(Top_win):
     def __init__(self, title: str, width: int, height: int):
