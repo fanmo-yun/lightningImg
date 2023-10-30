@@ -27,16 +27,16 @@ class ImageProcess_Win(Window):
     
     def main_surface(self):
         self.proframe = ctk.CTkFrame(master=self, width=self.w, height=self.h)
-        self.loadbutton = ctk.CTkButton(master=self.proframe, text="加载", width=80, command=self.load_file)
-        self.outputbutton = ctk.CTkButton(master=self.proframe, text="批量格式转换", width=80, command=self.output_multiple)
-        self.savebutton = ctk.CTkButton(master=self.proframe, text="另存为", width=80, command=self.save_file)
+        self.loadbutton = ctk.CTkButton(master=self.proframe, text="加载", width=80, command=self.load_file, font=self.fontname)
+        self.outputbutton = ctk.CTkButton(master=self.proframe, text="批量格式转换", width=80, command=self.output_multiple, font=self.fontname)
+        self.savebutton = ctk.CTkButton(master=self.proframe, text="另存为", width=80, command=self.save_file, font=self.fontname)
         self.ImageCanvas = ctk.CTkCanvas(master=self.proframe, width=self.canvas_w, height=self.canvas_h, background='grey', highlightthickness=1, highlightbackground="grey")
 
-        self.comprbutton = ctk.CTkButton(master=self.proframe, text="质量压缩", width=100, height=55, command=self.compression_img)
-        self.wmarkbutton = ctk.CTkButton(master=self.proframe, text="翻转", width=100, height=55, command=self.rotate_img)
-        self.zoombutton = ctk.CTkButton(master=self.proframe, text="缩放", width=100, height=55, command=self.zoom_img)
-        self.blurbutton = ctk.CTkButton(master=self.proframe, text="模糊", width=100, height=55, command=self.blur_img)
-        self.screenshotbutton = ctk.CTkButton(master=self.proframe, text="屏幕截取", width=340, height=55, command=self.screenshot_win)
+        self.comprbutton = ctk.CTkButton(master=self.proframe, text="质量压缩", width=100, height=55, command=self.compression_img, font=self.fontname)
+        self.wmarkbutton = ctk.CTkButton(master=self.proframe, text="翻转", width=100, height=55, command=self.rotate_img, font=self.fontname)
+        self.zoombutton = ctk.CTkButton(master=self.proframe, text="缩放", width=100, height=55, command=self.zoom_img, font=self.fontname)
+        self.blurbutton = ctk.CTkButton(master=self.proframe, text="模糊", width=100, height=55, command=self.blur_img, font=self.fontname)
+        self.screenshotbutton = ctk.CTkButton(master=self.proframe, text="屏幕截取", width=340, height=55, command=self.screenshot_win, font=self.fontname)
 
         self.loadbutton.place(anchor='nw', x=10, y=10)
         self.outputbutton.place(anchor='nw', x=100, y=10)
@@ -66,14 +66,14 @@ class ImageProcess_Win(Window):
         self.screenshotwin.run(self.release)
     
     def load_file(self):
-        filename = filedialog.askopenfilename(initialdir=self.home_path, title="Open", filetypes = (["jpeg files","*.jpg"], ["png files","*.png"]))
+        filename = filedialog.askopenfilename(initialdir=self.home_path, title="打开文件", filetypes = (["jpeg files","*.jpg"], ["png files","*.png"]))
         if len(filename) != 0:
             self.filename = filename
         self.update_img()
     
     def save_file(self):
         if len(self.filename) != 0:
-            savefile_path = filedialog.asksaveasfilename(initialdir=self.home_path, title="Save", defaultextension=".jpg",filetypes = (["jpeg files","*.jpg"], ["png files","*.png"]))
+            savefile_path = filedialog.asksaveasfilename(initialdir=self.home_path, title="保存文件", defaultextension=".jpg",filetypes = (["jpeg files","*.jpg"], ["png files","*.png"]))
             if len(savefile_path) != 0: 
                 Image.open(self.filename).save(savefile_path, quality=85)
 

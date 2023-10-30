@@ -4,6 +4,7 @@ import pathlib
 class Window(ctk.CTk):
     def __init__(self, title: str, width: int, height: int):
         super().__init__()
+        self.fontname = ctk.CTkFont("宋体")
         ctk.set_appearance_mode("light")
         self.geometry(f'{width}x{height}+{int((self.winfo_screenwidth() - width) / 2)}+{int((self.winfo_screenheight() - height) / 2)}')
         self.resizable(False, False)
@@ -24,6 +25,7 @@ class Window(ctk.CTk):
 class Top_win(ctk.CTkToplevel):
     def __init__(self, title: str, width: int, height: int):
         super().__init__()
+        self.fontname = ctk.CTkFont("宋体")
         self.home_path = pathlib.Path.home()
         self.geometry(f'{width}x{height}+{int((self.winfo_screenwidth() - width) / 2)}+{int((self.winfo_screenheight() - height) / 2)}')
         self.resizable(False, False)

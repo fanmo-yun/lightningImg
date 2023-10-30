@@ -12,9 +12,9 @@ class ScreenShot_Win(Window):
     
     def main_surface(self):
         self.frame1 = ctk.CTkFrame(master=self)
-        self.switch1 = ctk.CTkSwitch(self.frame1, text="最小化", command=self.change_val)
-        self.button1 = ctk.CTkButton(self.frame1, width=50, text="全屏截取", command=self.full_screenshot)
-        self.button2 = ctk.CTkButton(self.frame1, width=50, text="选区截取", command=self.rect_screenshot)
+        self.switch1 = ctk.CTkSwitch(self.frame1, text="最小化", command=self.change_val, font=self.fontname)
+        self.button1 = ctk.CTkButton(self.frame1, width=50, text="全屏截取", command=self.full_screenshot, font=self.fontname)
+        self.button2 = ctk.CTkButton(self.frame1, width=50, text="选区截取", command=self.rect_screenshot, font=self.fontname)
         
         self.switch1.pack(side=ctk.TOP)
         self.button1.pack(side=ctk.LEFT, padx=40)
@@ -30,7 +30,7 @@ class ScreenShot_Win(Window):
     def full_screenshot(self):
         if self.minimize:
             self.iconify()
-        filepath = filedialog.asksaveasfilename(initialdir=self.home_path, defaultextension=".png", title = "Save", filetypes = (["png files","*.png"], ["jpeg files","*.jpg"]))
+        filepath = filedialog.asksaveasfilename(initialdir=self.home_path, defaultextension=".png", title="保存文件", filetypes = (["png files","*.png"], ["jpeg files","*.jpg"]))
         if len(filepath) != 0:
             self.screenshot(filepath, (0,0), self.surface_size(), 95)
         self.state('normal')
@@ -97,7 +97,7 @@ class ScreenShot_Win(Window):
     def scope_screenshot(self, event, path):
         self.get_end_pos(event)
         self.release()
-        filepath = filedialog.asksaveasfilename(initialdir=self.home_path, defaultextension=".png", title = "Save", filetypes = (["png files","*.png"], ["jpeg files","*.jpg"]))
+        filepath = filedialog.asksaveasfilename(initialdir=self.home_path, defaultextension=".png", title="保存", filetypes = (["png files","*.png"], ["jpeg files","*.jpg"]))
         if len(filepath) != 0:
             self.scope_screen(path, filepath, (self.startx, self.starty), (self.endx, self.endy), 95)
     

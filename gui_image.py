@@ -12,9 +12,9 @@ class output_multiple_win(Top_win):
         self.filelist = []
     
     def main_surface(self):
-        self.btn1 = ctk.CTkButton(self, text="加载", width=90, command=self.load_file)
-        self.btn2 = ctk.CTkButton(self, text="清空列表", width=90, command=self.clear_all)
-        self.conbtn = ctk.CTkButton(self, text="转化", width=90, command=self.convert)
+        self.btn1 = ctk.CTkButton(self, text="加载", width=90, command=self.load_file, font=self.fontname)
+        self.btn2 = ctk.CTkButton(self, text="清空列表", width=90, command=self.clear_all, font=self.fontname)
+        self.conbtn = ctk.CTkButton(self, text="转化", width=90, command=self.convert, font=self.fontname)
         self.combobox = ctk.CTkComboBox(self, values=["JPEG", "PNG"], width=80, variable=self.combobox_var, state="readonly")
         self.textbox = ctk.CTkTextbox(self, height=240)
         self.textbox.configure(state="disabled")
@@ -27,7 +27,7 @@ class output_multiple_win(Top_win):
     
     def load_file(self):
         self.textbox.configure(state="normal")
-        file_names = filedialog.askopenfilenames(initialdir=self.home_path, title="Open", filetypes=(["jpeg files", "*.jpg"], ["png files", "*.png"]))
+        file_names = filedialog.askopenfilenames(initialdir=self.home_path, title="打开文件", filetypes=(["jpeg files", "*.jpg"], ["png files", "*.png"]))
         if len(list(file_names)) != 0:
             for file in list(file_names):
                 if file not in self.filelist:
@@ -79,7 +79,7 @@ class compression_img_win(Top_win):
     def main_surface(self, release):
         self.slider = ctk.CTkSlider(self, from_=1, to=100, variable=self.defaultvar, command=self.show_num)
         self.label = ctk.CTkLabel(self, textvariable=self.var)
-        self.but1 = ctk.CTkButton(self, text="完成", width=60, command=lambda: self.save_file(release))
+        self.but1 = ctk.CTkButton(self, text="完成", width=60, command=lambda: self.save_file(release), font=self.fontname)
         
         self.slider.pack(side=ctk.TOP, pady=3)
         self.label.place(relx=0.5, rely=0.35, anchor=ctk.CENTER)
@@ -101,7 +101,7 @@ class compression_img_win(Top_win):
         except:
             ctkmb.showerror(title="质量压缩", message="图片压缩出错,请重试")
         finally:
-            ctkmb.showinfo(title="质量压缩",message="完毕")
+            ctkmb.showinfo(title="质量压缩",message="完成")
     
     def release_win(self, release):
         self.destroy()
@@ -121,7 +121,7 @@ class Zoom_img_win(Top_win):
     
     def main_surface(self, release):
         self.combobox = ctk.CTkComboBox(self, values=["-3x", "-2x", "2x", "3x"], width=80, variable=self.combobox_var, state="readonly")
-        self.but1 = ctk.CTkButton(self, text="完成", width=60, command=lambda: self.save_file(release))
+        self.but1 = ctk.CTkButton(self, text="完成", width=60, command=lambda: self.save_file(release), font=self.fontname)
         self.combobox.place(relx=0.5, rely=0.20, anchor=ctk.CENTER)
         self.but1.place(relx=0.5, rely=0.65, anchor=ctk.CENTER)
     
@@ -178,7 +178,7 @@ class Blur_img_win(compression_img_win):
                 img = img.convert("RGB")
                 gaussimg = img.filter(ImageFilter.GaussianBlur(int(self.var.get())))
                 gaussimg.save(path, quality=95)
-                ctkmb. showinfo(title="模糊处理", message="完毕")
+                ctkmb.showinfo(title="模糊处理", message="完毕")
                 self.destroy()
                 release(True, path)
                 del self
@@ -191,7 +191,7 @@ class Rotate_img_win(Zoom_img_win):
         self.combobox_var = ctk.StringVar(value="HORIZONTAL")
     
     def main_surface(self, release):
-        self.combobox = ctk.CTkComboBox(self, values=["HORIZONTAL", "VERTICAL"], width=80, variable=self.combobox_var, state="readonly")
+        self.combobox = ctk.CTkComboBox(self, values=["HORIZONTAL", "VERTICAL"], width=100, variable=self.combobox_var, state="readonly")
         self.but1 = ctk.CTkButton(self, text="完成", width=60, command=lambda: self.save_file(release))
         self.combobox.place(relx=0.5, rely=0.20, anchor=ctk.CENTER)
         self.but1.place(relx=0.5, rely=0.65, anchor=ctk.CENTER)
