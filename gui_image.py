@@ -1,9 +1,9 @@
 from gui import Top_win
 from api import get_time, suit_img
-import customtkinter as ctk, os, time
+import customtkinter as ctk, os
 from customtkinter import filedialog
 import tkinter.messagebox as ctkmb
-from PIL import Image, ImageFilter, ImageTk
+from PIL import Image, ImageFilter
 
 class output_multiple_win(Top_win):
     def __init__(self, title: str, width: int, height: int):
@@ -14,7 +14,7 @@ class output_multiple_win(Top_win):
     def main_surface(self):
         self.btn1 = ctk.CTkButton(self, text="加载", width=90, command=self.load_file)
         self.btn2 = ctk.CTkButton(self, text="清空列表", width=90, command=self.clear_all)
-        self.conbtn = ctk.CTkButton(self, text="Convert", width=90, command=self.convert)
+        self.conbtn = ctk.CTkButton(self, text="转化", width=90, command=self.convert)
         self.combobox = ctk.CTkComboBox(self, values=["JPEG", "PNG"], width=80, variable=self.combobox_var, state="readonly")
         self.textbox = ctk.CTkTextbox(self, height=240)
         self.textbox.configure(state="disabled")
@@ -79,7 +79,7 @@ class compression_img_win(Top_win):
     def main_surface(self, release):
         self.slider = ctk.CTkSlider(self, from_=1, to=100, variable=self.defaultvar, command=self.show_num)
         self.label = ctk.CTkLabel(self, textvariable=self.var)
-        self.but1 = ctk.CTkButton(self, text="Done", width=60, command=lambda: self.save_file(release))
+        self.but1 = ctk.CTkButton(self, text="完成", width=60, command=lambda: self.save_file(release))
         
         self.slider.pack(side=ctk.TOP, pady=3)
         self.label.place(relx=0.5, rely=0.35, anchor=ctk.CENTER)
@@ -121,7 +121,7 @@ class Zoom_img_win(Top_win):
     
     def main_surface(self, release):
         self.combobox = ctk.CTkComboBox(self, values=["-3x", "-2x", "2x", "3x"], width=80, variable=self.combobox_var, state="readonly")
-        self.but1 = ctk.CTkButton(self, text="Done", width=60, command=lambda: self.save_file(release))
+        self.but1 = ctk.CTkButton(self, text="完成", width=60, command=lambda: self.save_file(release))
         self.combobox.place(relx=0.5, rely=0.20, anchor=ctk.CENTER)
         self.but1.place(relx=0.5, rely=0.65, anchor=ctk.CENTER)
     
@@ -192,7 +192,7 @@ class Rotate_img_win(Zoom_img_win):
     
     def main_surface(self, release):
         self.combobox = ctk.CTkComboBox(self, values=["HORIZONTAL", "VERTICAL"], width=80, variable=self.combobox_var, state="readonly")
-        self.but1 = ctk.CTkButton(self, text="Done", width=60, command=lambda: self.save_file(release))
+        self.but1 = ctk.CTkButton(self, text="完成", width=60, command=lambda: self.save_file(release))
         self.combobox.place(relx=0.5, rely=0.20, anchor=ctk.CENTER)
         self.but1.place(relx=0.5, rely=0.65, anchor=ctk.CENTER)
     

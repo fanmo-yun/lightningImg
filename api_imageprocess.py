@@ -1,16 +1,18 @@
+from api import check_path, remove_file, suit_img
+from api_screenshot import ScreenShot_Win
+from customtkinter import filedialog
+import tkinter.messagebox as ctkmb
+import customtkinter as ctk, sys
+import tkinter as tk
 from gui import Window
 from gui_image import *
 from PIL import ImageTk
-from api import check_path, remove_file, suit_img
-import customtkinter as ctk, sys
-import tkinter.messagebox as ctkmb
-from customtkinter import filedialog
-from api_screenshot import ScreenShot_Win
 
 class ImageProcess_Win(Window):
     def __init__(self, title, width, height):
         super().__init__(title, width, height)
         check_path()
+        self.config()
         self.filename = ""
         self.canvas_w = self.w-22
         self.canvas_h = self.h-150
@@ -29,7 +31,7 @@ class ImageProcess_Win(Window):
         self.outputbutton = ctk.CTkButton(master=self.proframe, text="批量格式转换", width=80, command=self.output_multiple)
         self.savebutton = ctk.CTkButton(master=self.proframe, text="另存为", width=80, command=self.save_file)
         self.ImageCanvas = ctk.CTkCanvas(master=self.proframe, width=self.canvas_w, height=self.canvas_h, background='grey', highlightthickness=1, highlightbackground="grey")
-        
+
         self.comprbutton = ctk.CTkButton(master=self.proframe, text="质量压缩", width=100, height=55, command=self.compression_img)
         self.wmarkbutton = ctk.CTkButton(master=self.proframe, text="翻转", width=100, height=55, command=self.rotate_img)
         self.zoombutton = ctk.CTkButton(master=self.proframe, text="缩放", width=100, height=55, command=self.zoom_img)
@@ -72,7 +74,8 @@ class ImageProcess_Win(Window):
     def save_file(self):
         if len(self.filename) != 0:
             savefile_path = filedialog.asksaveasfilename(initialdir=self.home_path, title="Save", defaultextension=".jpg",filetypes = (["jpeg files","*.jpg"], ["png files","*.png"]))
-            Image.open(self.filename).save(savefile_path, quality=85)
+            if len(savefile_path) != 0: 
+                Image.open(self.filename).save(savefile_path, quality=85)
 
     def output_multiple(self):
         self.attributes("-disabled", True)

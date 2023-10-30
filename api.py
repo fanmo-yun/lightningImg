@@ -24,4 +24,4 @@ def suit_img(path, canvas_w, canvas_h):
     suitvar = min([size1, size2])
     w = int(img.size[0]*suitvar)
     h = int(img.size[1]*suitvar)
-    return img.resize((w, h), Image.ANTIALIAS), suitvar
+    return img.resize((w, h), Image.LANCZOS), suitvar
